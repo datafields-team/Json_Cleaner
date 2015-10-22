@@ -25,8 +25,12 @@ Json_Cleaner is a Python library that's used to help write maintainable code to 
 2. More complex handling of a particular field
     
     ```python
-    from cleaner import JSONCleaner
     
+    # For data such as this:
+    # {'geo_coordinates': [['54.3321', '23.1134'], ['-75.1223', '-60.6656'], ['10.3302', '11.0029']]}
+    
+    
+    # This callback gets registered and is later called in the 'clean_json' function
     @JSONCleaner.key_clean('geo_coordinates')
     def clean_coordinates(key, val):
         if val:
@@ -42,6 +46,3 @@ Json_Cleaner is a Python library that's used to help write maintainable code to 
             
     
     ```
-
-
-3. 
