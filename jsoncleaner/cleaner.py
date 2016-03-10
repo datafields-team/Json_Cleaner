@@ -1,4 +1,5 @@
 import json
+import dpath.util
 from callback_functions.replace_callback import ReplaceCallback
 from transforms.transformations import default_callback
 
@@ -40,14 +41,28 @@ class JsonCleaner(object):
     @classmethod
     def loop_through_json(cls, json_dict):
         modified_object = {}
-        for key, val in json_dict.iteritems():
-            if cls._clean_functions.get(key):
-                new_key, new_val = cls._clean_functions[key](key, val)
+        for path, clean_function in cls._clean_functions.iteritems():
+            if cls._clean_functions.get(path):
+                data = dpath.util.get(json_dict, path)
+                new_key, new_val = cls._clean_functions[path](path, data)
             else:
                 new_key, new_val = None, None
             if (new_key, new_val) != (None, None):
                 modified_object[new_key] = new_val
         return modified_object
+
+
+    # @classmethod
+    # def loop_through_json(cls, json_dict):
+    #     modified_object = {}
+    #     for key, val in json_dict.iteritems():
+    #         if cls._clean_functions.get(key):
+    #             new_key, new_val = cls._clean_functions[key](key, val)
+    #         else:
+    #             new_key, new_val = None, None
+    #         if (new_key, new_val) != (None, None):
+    #             modified_object[new_key] = new_val
+    #     return modified_object
     
 
     @classmethod

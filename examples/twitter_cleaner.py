@@ -1,24 +1,24 @@
-from tweepy.streaming import StreamListener
-from tweepy import OAuthHandler
-from tweepy import Stream
-from cleaner import JsonCleaner
-from auth_credentials import consumer_key, consumer_secret, access_token, access_token_secret
+import json
+from jsoncleaner.cleaner import JsonCleaner
 
 
-class TwitterStreamer(StreamListener):
+@JsonCleaner.key_clean('/text')
+def text_extract(key, val):
+    return 'tweet', val.strip()
 
-    def on_data(self, raw_data):
-        print raw_data
 
-    def on_error(self, status_code):
-        print status_code
+kept_keys = []
 
+replacement_keys = {
+    '/user/screen_name': {'new_key': 'screen_name', 'return_type': str},
+
+                    }
 
 
 if __name__ == '__main__':
-    streamer = TwitterStreamer()
-    auth = OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    with open('data.json') as data_file:
+        json_data = json.loads(data_file.read())
 
-    stream = Stream(auth, streamer)
-    stream.filter(track=['messi, ronaldo, hazard'])
+    JsonCleaner.replace_keys(replacement_keys)
+    JsonCleaner.keep_keys(kept_keys)
+
