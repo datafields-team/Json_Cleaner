@@ -4,7 +4,7 @@ from jsoncleaner.cleaner import JsonCleaner
 
 @JsonCleaner.key_clean('/text')
 def text_extract(key, val):
-    return 'tweet', val.strip()
+    return {'tweet': val.strip()}
 
 
 kept_keys = []
