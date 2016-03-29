@@ -40,9 +40,9 @@ Json_Cleaner is a Python library that's used to help write maintainable code to 
                 coordinates = coords.split(',')
                 coordinates = [float(c) for c in coordinates]
                 geo_coordinates.append(coordinates)
-            return 'lgc', geo_coordinates
+            return {'lgc': geo_coordinates}
         else:
-            return (None, None)
+            return None
             
     
     ```
