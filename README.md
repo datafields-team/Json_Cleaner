@@ -1,5 +1,5 @@
 # Json_Cleaner
-Json_Cleaner is a Python library that's used to help write maintainable code to clean JSON based on its keys. It provides the ability to declaratively specify how a particular JSON field and its corresponding value are handled thereby making code less verbose and more maintainable.
+Json_Cleaner is a Python library that's used to help write maintainable code to clean JSON based on its keys accessed like XPath. It provides the ability to declaratively specify how a particular JSON field and its corresponding value are handled thereby making code less verbose and more maintainable.
 
 ## Demo
 
