@@ -44,11 +44,11 @@ class JsonCleaner(object):
         for path, clean_function in cls._clean_functions.iteritems():
             if cls._clean_functions.get(path):
                 data = dpath.util.get(json_dict, path)
-                new_key, new_val = cls._clean_functions[path](path, data)
+                new_data = cls._clean_functions[path](path, data)
             else:
-                new_key, new_val = None, None
-            if (new_key, new_val) != (None, None):
-                modified_object[new_key] = new_val
+                new_data = None
+            if new_data != None:
+                modified_object.update(new_data)
         return modified_object
 
 
