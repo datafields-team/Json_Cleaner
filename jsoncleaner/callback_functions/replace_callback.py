@@ -8,6 +8,6 @@ class ReplaceCallback(CallbackFunction):
 
     def __call__(self, _, val):
         if val:
-            return (self._new_key, self._datatype(val))
+            return {self._new_key: self._datatype(val)}
         else:
-            return (None, None)
+            return None
